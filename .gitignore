@@ -1,0 +1,55 @@
+# Binaries and build artifacts
+main
+*.exe
+*.out
+*.a
+*.so
+*.o
+*.dll
+
+# Go build cache and workspace
+/go/
+*.test
+*.log
+
+# Compiled Object files
+*.o
+*.pyc
+*.pyo
+*.pyd
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+*.vscode/
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.iml
+
+# Ignore dependency files
+vendor/
+node_modules/
+
+# Go Module files
+go.sum
+go.work
+go.work.sum
+
+# Ignore environment variables and secrets
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Ignore database files (if applicable)
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignore deployment secrets
+docker-compose.override.yml

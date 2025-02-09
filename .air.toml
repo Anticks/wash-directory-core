@@ -1,0 +1,17 @@
+[build]
+  cmd = "go build -o ./tmp/main ./cmd/*.go"
+  bin = "./tmp/main"
+  include_ext = ["go", "templ"]
+  exclude_dir = ["tmp", "node_modules", "vendor", "static"]
+  delay = 1000
+
+[log]
+  level = "debug"
+  color = true
+
+[watcher]
+  dirs = ["."]
+  ignore_dirs = ["tmp", "node_modules", "vendor", "static"]
+  extensions = ["go", "templ"]
+  follow_symlink = true
+  recursive = true
