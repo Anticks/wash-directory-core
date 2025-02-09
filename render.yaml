@@ -15,3 +15,5 @@ services:
         sync: false
       - key: DATABASE_URL
         sync: false
+      - key: GO_VERSION
+        value: 1.23.5
