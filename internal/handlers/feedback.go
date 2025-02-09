@@ -18,6 +18,7 @@ type FeedbackPayload struct {
 	Email   string `json:"email"`
 	Message string `json:"message"`
 	Toast   string `json:"toast"`
+	Error   string `json:"error"`
 }
 
 // HandleFeedbackForm returns a handler function for processing the feedback form.
@@ -40,7 +41,6 @@ func HandleFeedbackForm(logger *zap.SugaredLogger) gin.HandlerFunc {
 		// Validate input.
 		if payload.Email == "" || payload.Message == "" {
 			logger.Warn("Missing email or message in feedback form")
-			// update.Set("Email and Message are required.", "response")
 			c.Status(http.StatusBadRequest)
 			datastar.NewSSE(c.Writer, c.Request).MarshalAndMergeSignals(update)
 			return
@@ -59,7 +59,7 @@ func HandleFeedbackForm(logger *zap.SugaredLogger) gin.HandlerFunc {
 		response, err := client.Send(messageToSend)
 		if err != nil {
 			logger.Errorf("Failed to send email: %v", err)
-			// update.Set("Failed to send email. Please try again.", "response")
+			update.Set("Error! Failed to send email. Please try again.", "error")
 			c.Status(http.StatusInternalServerError)
 			datastar.NewSSE(c.Writer, c.Request).MarshalAndMergeSignals(update)
 			return
@@ -67,13 +67,11 @@ func HandleFeedbackForm(logger *zap.SugaredLogger) gin.HandlerFunc {
 
 		if response.StatusCode >= 200 && response.StatusCode < 300 {
 			logger.Infof("Feedback email sent successfully from %s", payload.Email)
-			// update.Set("Thank you for your feedback! We'll get back to you soon.", "response")
-			// Update the toast signal with a plain text message.
 			update.Set("Message sent successfully.", "toast")
 			c.Status(http.StatusOK)
 		} else {
 			logger.Errorf("SendGrid error: %d - %s", response.StatusCode, response.Body)
-			update.Set("Something went wrong. Please try again.", "response")
+			update.Set("Error! Failed to send email. Please try again.", "error")
 			c.Status(http.StatusInternalServerError)
 		}
 

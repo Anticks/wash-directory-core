@@ -7,6 +7,7 @@ type ComingSoonSignals struct {
 	Email   string `json:"email"`
 	Message string `json:"message"`
 	Toast   string `json:"toast"`
+	Error   string `json:"error"`
 }
 
 // defaultComingSoonSignals returns default values for the signals.
@@ -15,6 +16,7 @@ func defaultComingSoonSignals() ComingSoonSignals {
 		Email:   "",
 		Message: "",
 		Toast:   "",
+		Error:   "",
 	}
 }
 
@@ -23,6 +25,7 @@ const (
 	LoadingSignal = "$loading"
 	EmailSignal   = "$email"
 	MessageSignal = "$message"
+	ErrorSignal   = "$error"
 )
 
 templ ComingSoon() {
@@ -144,6 +147,14 @@ templ ComingSoon() {
 					<span
 						data-text={ ToastSignal }
 						data-on-interval__duration.4s={ fmt.Sprintf(`%s = ""`, ToastSignal) }
+					></span>
+				</div>
+			</div>
+			<div class="toast toast-top toast-end" data-show={ ErrorSignal }>
+				<div class="alert alert-error">
+					<span
+						data-text={ ErrorSignal }
+						data-on-interval__duration.4s={ fmt.Sprintf(`%s = ""`, ErrorSignal) }
 					></span>
 				</div>
 			</div>

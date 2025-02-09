@@ -6,4 +6,7 @@
 \" loading-sm></span></button></div><div id=\"response-message\" class=\"mt-4 text-center text-lg font-medium\"></div></div></form></div></div><div class=\"toast toast-top toast-end\" data-show=\"
 \"><div class=\"alert alert-success\"><span data-text=\"
 \" data-on-interval__duration.4s=\"
+\"></span></div></div><div class=\"toast toast-top toast-end\" data-show=\"
+\"><div class=\"alert alert-error\"><span data-text=\"
+\" data-on-interval__duration.4s=\"
 \"></span></div></div></body></html>
